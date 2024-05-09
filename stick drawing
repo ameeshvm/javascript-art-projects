@@ -1,0 +1,56 @@
+// run in: https://openprocessing.org/sketch/create
+
+// code:
+
+const SPEED = 3;
+const NUM_DOTS = 150;
+const MAX_DIST = 100;
+let dots = [];
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	colorMode(HSB, 100, 100, 100, 100);
+	background(0);
+	
+	for(let i=0; i<NUM_DOTS; i++) {
+		dots.push({
+			x: random(0, width),
+			xSpeed: random(-SPEED, SPEED),
+			y: random(0, height),
+			ySpeed: random(-SPEED, SPEED),
+			color: random(0, 100)
+		});
+	}
+}
+
+function draw() {
+	//background(0); (do not activate)
+	
+	for(let d of dots) {
+		d.x += d.xSpeed;
+		if(d.x < 0)
+			d.x += width;
+		if(d.x > width)
+			d.x -= width;
+		
+		d.y += d.ySpeed;
+		if(d.y < 0)
+			d.y += height;
+		if(d.y > height)
+			d.y -= height;
+		
+		stroke(d.color, 100, 100, 30);
+		strokeWeight(1);
+		//point(d.x, d.y); (do not activate)
+		
+		if(dist(mouseX, mouseY, pmouseX, pmouseY) > 0) {
+			if(dist(mouseX, mouseY, d.x, d.y) < MAX_DIST) {
+				line(mouseX, mouseY, d.x, d.y);
+			}
+		}
+	}
+}
+
+function mousePressed() {
+	background(0);
+}
