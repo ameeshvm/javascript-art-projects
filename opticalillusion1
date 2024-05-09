@@ -1,0 +1,36 @@
+run in: https://openprocessing.org/sketch/create
+
+const size = 35;
+const colors = [];
+const reduction = 3.6;
+const pattern = [1,0,1,1,0,1,0,0];
+const len = pattern.length;
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	noStroke();
+	
+	colors.push(color(173, 220, 2));  // 0
+	colors.push(color(63, 191, 132)); // 1
+	colors.push(color(255, 255, 255));// 2
+	colors.push(color(202, 37, 131)); // 3
+}
+
+function draw() {
+	for(let y=0; y*size < height; y++) {
+		for(let x=0; x*size < width; x++) {
+			fill(colors[(y+x) % 2]);
+			rect(x*size, y*size, size, size);
+		}
+	}
+	
+	for(let y=0; y*size < height; y++) {
+		for(let x=0; x*size < width; x++) {
+			const num = pattern[(x+y) % len];
+			fill(colors[2 + num]);
+			circle(x*size, y*size, size/reduction);
+		}
+	}
+	
+	noLoop();
+}
