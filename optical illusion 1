@@ -1,4 +1,6 @@
-run in: https://openprocessing.org/sketch/create
+// run in: https://openprocessing.org/sketch/create
+
+// code:
 
 const size = 35;
 const colors = [];
